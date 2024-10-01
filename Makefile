@@ -1,5 +1,11 @@
 all: clean mocks
 
+build:
+	go build cmd/main.go
+
+run: clean build
+	./main
+
 mocks: clean
 	mockgen -source=pkg/service/service.go -destination=mocks/service/mock_service.go
 #	mockgen -source=pkg/repository/repository.go -destination=mocks/repository/mock_repository.go
