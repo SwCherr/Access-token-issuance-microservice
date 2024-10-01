@@ -17,7 +17,7 @@ gcov: test
 	go tool cover -html=c.out
 
 clean: 
-	rm -rf mocks/
+#	rm -rf mocks/
 	rm -rf c.out
 
 createFileMigration:
