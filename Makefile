@@ -20,6 +20,15 @@ clean:
 	rm -rf mocks/
 	rm -rf c.out
 
+createFileMigration:
+	migrate create -ext sql -dir ./schema -seq init
+	
+generateDB:
+	migrate -path ./schema -database 'postgres://postgres:qwerty@localhost:5436/postgres?sslmode=disable' up
+
+cleanDB:
+	migrate -path ./schema -database 'postgres://postgres:qwerty@localhost:5436/postgres?sslmode=disable' down
+
 .PHONY: clean
  
 # -source определяет исходный файл, из которого будет сгенерирован mock-объект.
