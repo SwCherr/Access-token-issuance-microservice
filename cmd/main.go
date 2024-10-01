@@ -12,15 +12,11 @@ import (
 )
 
 func main() {
-	logrus.SetFormatter(new(logrus.JSONFormatter)) // установка формата вывода логов
+	logrus.SetFormatter(new(logrus.JSONFormatter))
 
 	if err := InitConfig(); err != nil {
 		logrus.Fatalf("error ocurred while init config: %s", err.Error())
 	}
-
-	// if err := godotenv.Load(); err != nil {
-	// 	logrus.Fatalf("error loading env variable: %s", err.Error())
-	// }
 
 	db, err := repository.NewPostgresDB(repository.Config{
 		Host:     viper.GetString("db.host"),
@@ -29,7 +25,6 @@ func main() {
 		DBName:   viper.GetString("db.dbname"),
 		SSLMode:  viper.GetString("db.sslmode"),
 		Password: viper.GetString("db.password"),
-		// Password: os.Getenv("DB_PASSWORD"),
 	})
 
 	if err != nil {
