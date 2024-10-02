@@ -15,7 +15,6 @@ import (
 )
 
 func TestHandler_SignUp(t *testing.T) {
-	// Init Test Table
 	type mockBehavior func(r *mock_service.MockAuthorization, user app.User)
 
 	tests := []struct {
@@ -94,7 +93,6 @@ func TestHandler_SignUp(t *testing.T) {
 }
 
 func TestHandler_GetPareTokens(t *testing.T) {
-	// Init Test Table
 	type mockBehavior func(r *mock_service.MockAuthorization, input app.Sesion)
 
 	tests := []struct {
@@ -178,7 +176,6 @@ func TestHandler_GetPareTokens(t *testing.T) {
 }
 
 func TestHandler_RefreshToken(t *testing.T) {
-	// Init Test Table
 	type mockBehavior func(r *mock_service.MockAuthorization, input app.Sesion)
 
 	tests := []struct {

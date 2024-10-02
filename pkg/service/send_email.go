@@ -6,7 +6,7 @@ import (
 	"net/smtp"
 )
 
-func (s *AuthService) sendEmail(email string) { // Connect to the remote SMTP server.
+func (s *AuthService) sendEmail(email string) {
 	from := "example@gmail.com"
 	pass := "very_secret_pass"
 	to := email

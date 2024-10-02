@@ -15,7 +15,7 @@ import (
 
 const (
 	salt            = "ahdbvjdccjdn"
-	siginkey        = "djdjdjbvhdn3d^&*(" // ключ подписи для расшифровки токена
+	siginkey        = "djdjdjbvhdn3d^&*("
 	accessTokenITL  = 30 * time.Minute
 	refreshTokenITL = 720 * time.Hour
 )
@@ -50,12 +50,11 @@ func (s *AuthService) GetPareToken(input app.Sesion) (acces, refresh string, err
 		return "", "", err
 	}
 
-	input.RefreshToken = s.generateHash(newRefreshToken) // hash for save in db
+	input.RefreshToken = s.generateHash(newRefreshToken)
 	if err := s.createSession(input); err != nil {
 		return "", "", err
 	}
 
-	// предача newRefreshToken в формате base64
 	newRefreshToken = b64.StdEncoding.EncodeToString([]byte(newRefreshToken))
 	return newAccessToken, newRefreshToken, nil
 }
@@ -66,7 +65,6 @@ func (s *AuthService) RefreshToken(input app.Sesion) (access, refresh string, er
 		return "", "", err
 	}
 
-	// декодирование RefreshToken из base64
 	token, err := b64.StdEncoding.DecodeString(input.RefreshToken)
 	if err != nil {
 		return "", "", err
