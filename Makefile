@@ -1,4 +1,4 @@
-all: clean mocks
+all: clean build mocks test gcov
 
 build:
 	go build cmd/main.go
@@ -14,17 +14,19 @@ gcov:
 
 clean: 
 	rm -rf c.out
+	rm -rf main
 #	rm -rf mocks/
 
-
+# dependencies
 mocks: clean
 	mockgen -source=pkg/service/service.go -destination=mocks/service/mock_service.go
 
-dockerPostgres:
-	docker pull postgres
+postgres: dockerPosgres generateDB
+#	docker exec -it ed9f79168839 /bin/bash
 	
-# dockerDB:
-# 	docker run --name=todo-db -e POSTGRES_PASSWORD='qwerty' -p 5436:5432 -d --rm postgres
+dockerPosgres:
+	docker pull postgres
+	docker run --name=todo-db -e POSTGRES_PASSWORD='qwerty' -p 5436:5432 -d --rm postgres
 
 # createFileMigration:
 # 	migrate create -ext sql -dir ./schema -seq init
